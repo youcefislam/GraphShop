@@ -16,7 +16,6 @@ export const prisma = new PrismaClient({ log: ["query"] });
     globalCart.forEach((cartElement) => {
         const expiresIn = (cartElement.addedAt.getTime() + 5 * 60 * 1000) - date.getTime();
         const delay = expiresIn > 0 ? expiresIn : 0
-        // Cancel the reserved quantity to the original product
         setTimeout(() => {
             return prisma.$transaction([
                 prisma.product.update({
